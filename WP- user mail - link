@@ -1,0 +1,17 @@
+<?php
+global $current_user, $user_login;
+get_currentuserinfo();
+if ($user_login) {
+	$email = $current_user->user_email;
+         // $email="akos@harmatakos.hu";
+        //var_dump($email);
+       $link='https://absolutelywoman.hu/edzesnaplo.php/?email='.$email.'';
+       //var_dump($link);
+};
+?>
+
+<html> 
+<body> 
+<a  class="bbc-btn" href='<?php echo $link; ?>' target='_blank'>BBC edzé sés étkezési napló</a> 
+</body> 
+</html>
