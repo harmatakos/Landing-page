@@ -1,0 +1,39 @@
+<html>
+<head>
+<script type="text/javascript">
+	var hatarido_nap		= 1;
+	var hatarido_ora_perc	= "23:59";
+	var beagyazott_oldal	= "https://harmatakos/teszt/";
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+#inner_page
+{
+    height:   100%;
+    left:     0px;
+    position: absolute;
+    top:      0px;
+    width:    100%;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/hu.js" integrity="sha256-y6Os8IY50LlbZU/CSk3F54XGS2MVtYBJZWfoVIZsUFM=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	var deadline = moment(moment("[subdate]").add(hatarido_nap,'days').format("YYYY-MM-DD " + hatarido_ora_perc),"YYYY-MM-DD HH:mm:ss");
+	var milliseconds = deadline.diff(moment());
+	console.log("[subdate] - " + deadline.format("YYYY-MM-DD HH:mm:ss"));
+	var duration	= moment.duration(milliseconds);
+	var days 		= Math.floor(duration.asDays());
+	var hours		= Math.floor(duration.asHours())-24*days;
+	var dur_string	= days.toString().padStart(2,"0") + ":" + hours.toString().padStart(2,"0") + moment.utc(milliseconds).format(":mm:ss");
+	console.log(dur_string);
+	$("body").append('<iframe frameborder="0" id="inner_page" src="'+beagyazott_oldal+'?start_time='+dur_string+'"></iframe>');
+});
+</script>
+</head>
+<body>
+</body>
+</html>
